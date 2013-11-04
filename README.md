@@ -1,2 +1,2 @@
-IIM A3 Doctrine2 Repository
-===========================
+IIM A3 Doctrine2 DBAL Repository
+================================
