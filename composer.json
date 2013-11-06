@@ -1,8 +1,5 @@
 {
     "require": {
         "doctrine/dbal": "2.4.*"
-    },
-    "autoload": {
-        "psr-0": {"": "src/"}
     }
 }
