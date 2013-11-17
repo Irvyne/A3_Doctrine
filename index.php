@@ -4,19 +4,12 @@
  * This code is under the MIT License (https://github.com/Irvyne/license/blob/master/MIT.md)
  */
 
-require 'vendor/autoload.php';
+require __DIR__.'/vendor/autoload.php';
 
 $config = new \Doctrine\DBAL\Configuration();
 
-$connectionParams = array(
-    'dbname'    => 'test',
-    'user'      => 'root',
-    'password'  => 'root',
-    'host'      => 'localhost',
-    'port'      => 8889, // MAMP => 8889 / WAMP => 3306 / Default => 3306
-    'driver'    => 'pdo_mysql',
-    'charset'   => 'utf8',
-);
+$connectionParams = require __DIR__.'/config/database.php';
+
 $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
 
 $sql = "SELECT * FROM article"; // SQL Request
