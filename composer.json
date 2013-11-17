@@ -2,7 +2,7 @@
     "name": "irvyne/iim-a3-doctrine2",
     "license": "MIT",
     "type": "iim-a3",
-    "description": "Doctrine2 DBAL/ORM for IIM A3 Students",
+    "description": "Doctrine2 DBAL for IIM A3 Students",
     "authors": [
         {
             "name": "Thibaud BARDIN (Irvyne)",

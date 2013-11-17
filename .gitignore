@@ -1,9 +1,4 @@
-# PhpStorm
-.idea/
-
-# Composer
-vendor/
-
-# Mac
-.DS_*
-
+/bin/       # Composer
+/vendor/    # Composer
+/.idea/     # PhpStorm
+.DS_*       # Mac OSX
