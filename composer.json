@@ -1,9 +1,23 @@
 {
+    "name": "irvyne/iim-a3-doctrine2",
+    "license": "MIT",
+    "type": "iim-a3",
+    "description": "Doctrine2 ORM for IIM A3 Students",
+    "authors": [
+        {
+            "name": "Thibaud BARDIN (Irvyne)",
+            "email": "thibaud.bardin@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {"": "src/"}
+    },
     "require": {
         "doctrine/dbal": "2.4.*",
         "doctrine/orm": "2.4.*"
     },
-    "autoload": {
-        "psr-0": {"": "src/"}
-    }
+    "config": {
+        "bin-dir": "bin"
+    },
+    "minimum-stability": "stable"
 }

@@ -4,11 +4,7 @@
  * This code is under the MIT License (https://github.com/Irvyne/license/blob/master/MIT.md)
  */
 
-require 'vendor/autoload.php';
-
-$config = new \Doctrine\DBAL\Configuration();
-
-$connectionParams = array(
+return array(
     'dbname'    => 'test',
     'user'      => 'root',
     'password'  => 'root',
@@ -17,10 +13,3 @@ $connectionParams = array(
     'driver'    => 'pdo_mysql',
     'charset'   => 'utf8',
 );
-$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
-
-$sql = "SELECT * FROM article"; // SQL Request
-$stmt = $conn->query($sql); // Simple, but has several drawbacks
-$result = $stmt->fetchAll();
-
-var_dump($result);
