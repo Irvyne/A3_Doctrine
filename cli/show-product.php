@@ -4,6 +4,8 @@
  * This code is under the MIT License (https://github.com/Irvyne/license/blob/master/MIT.md)
  */
 
+PHP_SAPI === 'cli' ?: exit('CLI Mandatory !');
+
 $entityManager = require __DIR__."/../bootstrap.php";
 
 $id = $argv[1];
@@ -14,4 +16,4 @@ if ($product === null) {
     exit(1);
 }
 
-echo sprintf("-%s\n", $product->getName());
+echo sprintf("%d- %s\n", $product->getId(), $product->getName());

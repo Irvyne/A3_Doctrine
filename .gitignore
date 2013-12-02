@@ -1,4 +1,5 @@
-/bin/       # Composer
-/vendor/    # Composer
-/.idea/     # PhpStorm
-.DS_*       # Mac OSX
+/bin/
+!bin/.gitkeep
+/vendor/
+/.idea/
+.DS_*

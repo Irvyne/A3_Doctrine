@@ -1,0 +1,76 @@
+Bug:
+    type: entity
+    table: bug
+    repositoryClass: BugRepository
+    id:
+        id:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        description:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: false
+            precision: 0
+        created:
+            type: datetime
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+        status:
+            type: string
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+    manyToMany:
+        products:
+            targetEntity: Product
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinTable:
+                name: bug_product
+                joinColumns:
+                    -
+                        name: bug_id
+                        referencedColumnName: id
+                        onDelete: CASCADE
+                inverseJoinColumns:
+                    -
+                        name: product_id
+                        referencedColumnName: id
+                        onDelete: CASCADE
+            orderBy: null
+    manyToOne:
+        reporter:
+            targetEntity: User
+            cascade: {  }
+            mappedBy: null
+            inversedBy: reportedBugs
+            joinColumns:
+                reporter_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        engineer:
+            targetEntity: User
+            cascade: {  }
+            mappedBy: null
+            inversedBy: assignedBugs
+            joinColumns:
+                engineer_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

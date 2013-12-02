@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity repository-class="ProductRepository" name="Product" table="product">
+  <entity repository-class="UserRepository" name="User" table="user">
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
     </id>
     <field name="name" type="string" column="name" length="255" precision="0" scale="0" nullable="false"/>
-    <many-to-many field="bugs" target-entity="Bug">
-      <join-table name="product_bug">
-        <join-columns>
-          <join-column name="product_id" referenced-column-name="id" on-delete="CASCADE"/>
-        </join-columns>
-        <inverse-join-columns>
-          <join-column name="bug_id" referenced-column-name="id" on-delete="CASCADE"/>
-        </inverse-join-columns>
-      </join-table>
-    </many-to-many>
+    <one-to-many field="assignedBugs" target-entity="Bug" mapped-by="engineer"/>
+    <one-to-many field="reportedBugs" target-entity="Bug" mapped-by="reporter"/>
   </entity>
 </doctrine-mapping>

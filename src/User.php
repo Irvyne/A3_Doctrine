@@ -4,10 +4,10 @@
  * This code is under the MIT License (https://github.com/Irvyne/license/blob/master/MIT.md)
  */
 
-use Doctrine\Common\Collections\ArrayCollection;
+use \Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @Entity
+ * @Entity(repositoryClass="UserRepository")
  * @Table(name="user")
  */
 class User
@@ -17,7 +17,7 @@ class User
      *
      * @Id
      * @Column(type="integer")
-     * @GeneratedValue
+     * @GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
@@ -28,9 +28,21 @@ class User
      */
     protected $name;
 
+    /**
+     * @var Doctrine\Common\Collections\ArrayCollection
+     *
+     * @OneToMany(targetEntity="Bug", mappedBy="reporter")
+     */
     protected $reportedBugs;
+
+    /**
+     * @var Doctrine\Common\Collections\ArrayCollection
+     *
+     * @OneToMany(targetEntity="Bug", mappedBy="engineer")
+     */
     protected $assignedBugs;
 
+    
     /**
      * Constructor
      */
@@ -41,7 +53,9 @@ class User
     }
 
     /**
-     * @return int
+     * Get id
+     *
+     * @return integer 
      */
     public function getId()
     {
@@ -49,18 +63,91 @@ class User
     }
 
     /**
+     * Set name
+     *
      * @param string $name
+     * @return User
      */
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * Get name
+     *
+     * @return string 
      */
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Add reportedBugs
+     *
+     * @param \Bug $reportedBugs
+     * @return User
+     */
+    public function addReportedBug(\Bug $reportedBugs)
+    {
+        $this->reportedBugs[] = $reportedBugs;
+
+        return $this;
+    }
+
+    /**
+     * Remove reportedBugs
+     *
+     * @param \Bug $reportedBugs
+     */
+    public function removeReportedBug(\Bug $reportedBugs)
+    {
+        $this->reportedBugs->removeElement($reportedBugs);
+    }
+
+    /**
+     * Get reportedBugs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getReportedBugs()
+    {
+        return $this->reportedBugs;
+    }
+
+    /**
+     * Add assignedBugs
+     *
+     * @param \Bug $assignedBugs
+     * @return User
+     */
+    public function addAssignedBug(\Bug $assignedBugs)
+    {
+        $this->assignedBugs[] = $assignedBugs;
+
+        return $this;
+    }
+
+    /**
+     * Remove assignedBugs
+     *
+     * @param \Bug $assignedBugs
+     */
+    public function removeAssignedBug(\Bug $assignedBugs)
+    {
+        $this->assignedBugs->removeElement($assignedBugs);
+    }
+
+    /**
+     * Get assignedBugs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAssignedBugs()
+    {
+        return $this->assignedBugs;
     }
 }

@@ -8,9 +8,12 @@ PHP_SAPI === 'cli' ?: exit('CLI Mandatory !');
 
 $entityManager = require __DIR__."/../bootstrap.php";
 
-$productRepository = $entityManager->getRepository('Product');
-$products = $productRepository->findAll();
+$newUsername = $argv[1];
 
-foreach ($products as $product) {
-    echo sprintf("%d- %s\n", $product->getId(), $product->getName());
-}
+$user = new User();
+$user->setName($newUsername);
+
+$entityManager->persist($user);
+$entityManager->flush();
+
+echo "Created User with ID " . $user->getId() . "\n";

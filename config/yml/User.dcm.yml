@@ -1,7 +1,7 @@
-Product:
+User:
     type: entity
-    table: product
-    repositoryClass: ProductRepository
+    table: user
+    repositoryClass: UserRepository
     id:
         id:
             type: integer
@@ -21,23 +21,19 @@ Product:
             unique: false
             nullable: false
             precision: 0
-    manyToMany:
-        bugs:
+    oneToMany:
+        reportedBugs:
             targetEntity: Bug
             cascade: {  }
-            mappedBy: null
+            mappedBy: reporter
             inversedBy: null
-            joinTable:
-                name: product_bug
-                joinColumns:
-                    -
-                        name: product_id
-                        referencedColumnName: id
-                        onDelete: CASCADE
-                inverseJoinColumns:
-                    -
-                        name: bug_id
-                        referencedColumnName: id
-                        onDelete: CASCADE
+            orphanRemoval: false
+            orderBy: null
+        assignedBugs:
+            targetEntity: Bug
+            cascade: {  }
+            mappedBy: engineer
+            inversedBy: null
+            orphanRemoval: false
             orderBy: null
     lifecycleCallbacks: {  }

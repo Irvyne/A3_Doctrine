@@ -17,7 +17,7 @@ class Bug
      *
      * @Id
      * @Column(type="integer")
-     * @GeneratedValue
+     * @GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
@@ -42,10 +42,27 @@ class Bug
      */
     protected $status;
 
+    /**
+     * @var Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ManyToMany(targetEntity="Product")
+     */
     protected $products;
 
-    protected $engineer;
+    /**
+     * @var User
+     *
+     * @ManyToOne(targetEntity="User", inversedBy="reportedBugs")
+     */
     protected $reporter;
+
+    /**
+     * @var User
+     *
+     * @ManyToOne(targetEntity="User", inversedBy="assignedBugs")
+     */
+    protected $engineer;
+
 
     /**
      * Constructor
@@ -56,7 +73,18 @@ class Bug
     }
 
     /**
-     * @return int
+     * @return Bug
+     */
+    public function close()
+    {
+        $this->status = "CLOSE";
+        return $this;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
      */
     public function getId()
     {
@@ -64,15 +92,22 @@ class Bug
     }
 
     /**
+     * Set description
+     *
      * @param string $description
+     * @return Bug
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * Get description
+     *
+     * @return string 
      */
     public function getDescription()
     {
@@ -80,15 +115,22 @@ class Bug
     }
 
     /**
+     * Set created
+     *
      * @param \DateTime $created
+     * @return Bug
      */
     public function setCreated($created)
     {
         $this->created = $created;
+
+        return $this;
     }
 
     /**
-     * @return \DateTime
+     * Get created
+     *
+     * @return \DateTime 
      */
     public function getCreated()
     {
@@ -96,18 +138,106 @@ class Bug
     }
 
     /**
+     * Set status
+     *
      * @param string $status
+     * @return Bug
      */
     public function setStatus($status)
     {
         $this->status = $status;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * Get status
+     *
+     * @return string 
      */
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Add products
+     *
+     * @param \Product $products
+     * @return Bug
+     */
+    public function addProduct(\Product $products)
+    {
+        $this->products[] = $products;
+
+        return $this;
+    }
+
+    /**
+     * Remove products
+     *
+     * @param \Product $products
+     */
+    public function removeProduct(\Product $products)
+    {
+        $this->products->removeElement($products);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * Set reporter
+     *
+     * @param \User $reporter
+     * @return Bug
+     */
+    public function setReporter(\User $reporter = null)
+    {
+        $reporter->addReportedBug($this);
+        $this->reporter = $reporter;
+
+        return $this;
+    }
+
+    /**
+     * Get reporter
+     *
+     * @return \User 
+     */
+    public function getReporter()
+    {
+        return $this->reporter;
+    }
+
+    /**
+     * Set engineer
+     *
+     * @param \User $engineer
+     * @return Bug
+     */
+    public function setEngineer(\User $engineer = null)
+    {
+        $engineer->addAssignedBug($this);
+        $this->engineer = $engineer;
+
+        return $this;
+    }
+
+    /**
+     * Get engineer
+     *
+     * @return \User 
+     */
+    public function getEngineer()
+    {
+        return $this->engineer;
     }
 }
